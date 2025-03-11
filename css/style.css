@@ -1,0 +1,166 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+/* Reset and Global Settings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body and Text */
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #ECF0F1; /* soft light grey */
+  color: #2C3E50; /* deep blue-grey */
+  line-height: 1.6;
+}
+
+/* Header / Jumbotron */
+.jumbotron {
+  padding: 4rem 2rem;
+  margin-bottom: 0;
+  text-align: center;
+  background: linear-gradient(135deg, #3498DB, #2ECC71); /* modern gradient */
+  color: #fff;
+  border-bottom-left-radius: 50% 10%;
+  border-bottom-right-radius: 50% 10%;
+  position: relative;
+}
+
+/* Navigation Bar */
+.navbar {
+  margin-bottom: 20px;
+  background-color: #2C3E50; /* dark blue-grey */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Navbar Links */
+.navbar-nav .nav-link {
+  color: #ECF0F1;
+  font-size: 1rem;
+  padding: 0.8rem 1rem;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+  color: #1ABC9C; /* teal accent on hover */
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+/* Container Settings */
+.container {
+  margin: 40px auto;
+  max-width: 1140px;
+  padding: 0 15px;
+}
+
+/* Responsive Images */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* Cards */
+.card {
+  margin-bottom: 20px;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Elements */
+.card-img-top {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.card-title {
+  font-weight: 600;
+  color: #2C3E50;
+}
+
+.card-text {
+  color: #4A4A4A;
+}
+
+/* Footer */
+footer {
+  background-color: #2C3E50;
+  color: #BDC3C7;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* List Group Items (Sidebar) */
+.list-group-item {
+  border: none;
+  border-bottom: 1px solid #BDC3C7;
+  padding: 10px 15px;
+  background-color: #ECF0F1;
+  transition: background-color 0.3s ease;
+}
+
+.list-group-item:hover {
+  background-color: #D0D7DE;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #1ABC9C;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 4px;
+}
+
+.btn-primary:hover {
+  background-color: #16A085;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: #95A5A6;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 4px;
+}
+
+.btn-secondary:hover {
+  background-color: #7F8C8D;
+  transform: translateY(-2px);
+}
+
+/* Links */
+a {
+  color: #1ABC9C;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #16A085;
+  text-decoration: underline;
+}
+
+/* Utility Classes */
+.mt-4 {
+  margin-top: 1.5rem;
+}
+
+.my-5 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
