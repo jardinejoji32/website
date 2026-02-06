@@ -4,67 +4,157 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Will You Be My Valentine?</title>
+  <!-- Import a modern font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    html, body { height: 100%; margin: 0; font-family: Arial, sans-serif; }
-    body{
-      background: linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)),
-                  url("images/bg.jpg") center/cover no-repeat fixed;
-      display:flex; align-items:center; justify-content:center;
+    :root {
+      --primary: #ff4d6d;
+      --secondary: #ff8fab;
+      --bg-dark: #2b2d42;
+      --card-bg: rgba(255,255,255,0.9);
+      --card-shadow: 0 12px 32px rgba(0,0,0,0.25);
     }
-    .card{
-      background: rgba(255,255,255,.92);
-      padding: 24px 22px;
-      border-radius: 18px;
-      width: min(520px, 92vw);
-      text-align:center;
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; font-family: 'Montserrat', sans-serif; }
+    body {
+      background: radial-gradient(circle at 20% 30%, var(--primary) 0%, transparent 60%),
+                  radial-gradient(circle at 80% 20%, var(--secondary) 0%, transparent 60%),
+                  linear-gradient(135deg, #f7e9f0 0%, #f3f4f9 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hearts {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: var(--primary);
+      transform: rotate(45deg);
+      animation: float 8s infinite ease-in;
+      opacity: 0.5;
+    }
+    .heart::before, .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: var(--primary);
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: 10px;
+      top: 0;
+    }
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(45deg);
+      }
+      100% {
+        transform: translateY(-10vh) rotate(45deg);
+      }
+    }
+    .card {
       position: relative;
-      overflow:hidden;
+      z-index: 1;
+      background: var(--card-bg);
+      padding: 32px 40px;
+      border-radius: 20px;
+      box-shadow: var(--card-shadow);
+      text-align: center;
+      max-width: 420px;
     }
-    .hearts{
-      position:absolute; inset:0; pointer-events:none; opacity:.35;
-      background-image:
-        radial-gradient(circle at 15% 20%, #ff4d6d 0 8px, transparent 9px),
-        radial-gradient(circle at 85% 30%, #ff4d6d 0 7px, transparent 8px),
-        radial-gradient(circle at 30% 80%, #ff4d6d 0 6px, transparent 7px),
-        radial-gradient(circle at 70% 75%, #ff4d6d 0 9px, transparent 10px);
+    h1 {
+      margin: 0 0 12px;
+      font-weight: 800;
+      font-size: 28px;
+      color: var(--bg-dark);
     }
-    h1{ margin: 6px 0 10px; font-size: 30px; }
-    p{ margin: 0 0 18px; font-size: 16px; }
-    .btns{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
-    button{
-      border:0; padding:12px 18px; border-radius: 999px;
-      font-size: 16px; cursor:pointer;
+    p {
+      margin: 0 0 24px;
+      font-weight: 400;
+      font-size: 16px;
+      color: var(--bg-dark);
     }
-    .yes{ background:#ff4d6d; color:white; }
-    .no{ background:#222; color:white; position:relative; }
-    #msg{ margin-top: 16px; font-weight: 700; }
+    .buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+    }
+    button {
+      border: none;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    button.yes {
+      background-color: var(--primary);
+      color: #fff;
+    }
+    button.no {
+      background-color: #444;
+      color: #fff;
+      position: relative;
+    }
+    button.yes:hover {
+      transform: scale(1.05);
+    }
+    #msg {
+      margin-top: 20px;
+      font-weight: 600;
+      color: var(--bg-dark);
+    }
   </style>
 </head>
 <body>
+  <div class="hearts" id="hearts"></div>
   <div class="card">
-    <div class="hearts"></div>
     <h1>Will you be my Valentine?</h1>
     <p>Just say yes and make my day.</p>
-    <div class="btns">
+    <div class="buttons">
       <button class="yes" id="yesBtn">Yes</button>
       <button class="no" id="noBtn">No</button>
     </div>
     <div id="msg"></div>
   </div>
   <script>
+    // Create floating hearts dynamically
+    const heartsContainer = document.getElementById('hearts');
+    for (let i = 0; i < 30; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDelay = Math.random() * -8 + 's';
+      heart.style.animationDuration = 6 + Math.random() * 4 + 's';
+      heartsContainer.appendChild(heart);
+    }
     const msg = document.getElementById('msg');
     document.getElementById('yesBtn').addEventListener('click', () => {
-      msg.textContent = "Yesss! I love you ❤️";
+      msg.textContent = 'Yesss! I love you \u2764\ufe0f';
     });
     const noBtn = document.getElementById('noBtn');
+    // Move the "No" button on mouseover for playful effect
     noBtn.addEventListener('mouseover', () => {
-      const x = Math.floor(Math.random() * 260) - 130;
-      const y = Math.floor(Math.random() * 160) - 80;
+      const x = Math.floor(Math.random() * 200) - 100;
+      const y = Math.floor(Math.random() * 150) - 75;
       noBtn.style.transform = `translate(${x}px, ${y}px)`;
     });
     noBtn.addEventListener('click', () => {
-      msg.textContent = "Nice try 😄";
+      msg.textContent = 'Nice try \ud83d\ude04';
     });
   </script>
 </body>
